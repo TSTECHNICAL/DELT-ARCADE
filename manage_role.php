@@ -1,0 +1,307 @@
+<?php 
+ob_start();
+session_start();
+if($_SESSION['userid']=="")
+{
+	header("location:index.php?msg1=notauthorized");
+	exit();
+}
+	
+	?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Control Panel | Manage Role</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="plugins/morris/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<link rel="stylesheet" href="plugins/iCheck/all.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+     <link rel="stylesheet" href="css/app.css" id="maincss">
+
+</head>
+<body class="hold-transition skin-red sidebar-mini">
+<div class="wrapper">
+<?php include ("../assets/include/connection.php");?>
+<?php include ("include/header.inc.php");?>
+  <!-- Left side column. contains the logo and sidebar -->
+ <?php include ("include/navigation.inc.php");?> 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>Manage Role</h1>
+      <ol class="breadcrumb">
+        <li><a href="desktop.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage Role</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          
+
+          <div class="box">
+            <div class="box-header box-header2">
+             <div class="col-sm-10">
+         <!--<h3 class="box-title">Data Table With Full Features</h3>--></div>
+              <div class="col-sm-2">
+              <div class="pull-right-btn">
+  <a data-bs-toggle="modal" data-bs-target="#role" onclick="rolereset();" class="btn btn-block btn-danger">Add New</a>
+       </div>
+       </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <form id="formID" name="formID" method="post" action="#" enctype="multipart/form-data">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                <th>Sr.No</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+     <?php
+  $Query=mysqli_query($con,"select * from `role` order by id desc");
+  $i=0; 
+  while($row=mysqli_fetch_array($Query)){$i++;
+   ?>   
+                <tr>
+                  <td><?php echo $i;?>.</td>
+                  <td><?php echo @$row["role"]; ?></td>
+                  
+                   <td><a href="javascript:void(0);" class="update-person" title="Edit" onClick="riledata(<?php echo $row['id']; ?>,'roleedit')"><i class="fa fa-edit" style="font-size:16px;"></i></a>&nbsp;&nbsp;&nbsp;
+                   
+      <a href="javascript:void(0);" onClick="delete_row(<?php echo $row['id']; ?>)" class="update-person" style="color:#f56954; font-size:16px;" title="Delete"><i class="fa fa-trash"></i></a>
+      
+      <?php 
+	  if($row['status']==1){
+	  ?>
+      &nbsp;&nbsp;&nbsp;
+      <a href="javascript:void(0);" onClick="Respond(<?php echo $row['id']; ?>)" class="update-person" style="color:#090; font-size:16px;" title="Active"><i class="fa fa-check-square-o"></i></a>
+      <?php } else if($row['status']==0){?>
+      &nbsp;&nbsp;&nbsp;
+      <a href="javascript:void(0);" onClick="UnRespond(<?php echo $row['id']; ?>)" class="update-person" style="color:#f00; font-size:16px;" title="Inactive"><i class="fa fa-square-o"></i></a>
+      
+      <?php }?>
+      
+      </td>
+   
+     
+                </tr>
+        <?php }?>
+               
+               
+                </tbody>
+                
+              </table>
+              <div class="box-header box-header2" style="margin-bottom: 10px;">&nbsp; </div>
+<div class="row">              
+<div class="col-sm-10"></div>
+              <div class="col-sm-2">
+               &nbsp;
+            </div>
+              </div>
+              </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+<?php include("include/footer.inc.php");?></div>
+<!-- ./wrapper -->
+<script>
+ 
+	
+$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+  $(function () {
+	  $(".checkbox-toggle").click(function () { 
+      var clicks = $(this).data('clicks');
+      if (clicks) {
+        //Uncheck all checkboxes
+        $("input[type='checkbox']").iCheck("uncheck");
+        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+      } else {
+        //Check all checkboxes
+        $("input[type='checkbox']").iCheck("check");
+        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+      }
+      $(this).data("clicks", !clicks);
+    });
+    //$("#example1").DataTable();
+    $('#example1').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": false,
+      "info": true,
+      "autoWidth": true
+    });
+  });
+</script>
+<script src="js/add_role.js"></script> 
+<script type="text/javascript">
+ function delete_row(Id) {
+   // Use SweetAlert for confirmation instead of standard confirm
+   Swal.fire({
+     title: 'Are You Sure?',
+     text: "You want to delete this role?",
+     icon: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#3085d6',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Yes, delete it!'
+   }).then((result) => {
+     if (result.isConfirmed) {
+       $.ajax({
+         type: "Post",
+         data:"id=" + Id + "& type=" + "delete" ,
+         url: "add_roleNow.php",
+         success: function (html) { 
+           if(html==1){
+             // Use SweetAlert instead of standard alert
+             showSuccessAlert("Selected Item Deleted Successfully", "Success", 'manage_role.php');
+           }
+           else if(html==0){
+             // Use SweetAlert for error
+             showErrorAlert("Some Technical Problem");
+           }
+         },
+         error: function (e) {
+           showErrorAlert("An error occurred while processing your request");
+         }
+       });
+     }
+   });
+ }
+</script>
+<script type="text/javascript">
+ function Respond(Id) {
+   // Use SweetAlert for confirmation instead of standard confirm
+   Swal.fire({
+     title: 'Set Role Inactive',
+     text: "Are you sure you want to set this role as inactive?",
+     icon: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#3085d6',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Yes, set inactive'
+   }).then((result) => {
+     if (result.isConfirmed) {
+       $.ajax({
+         type: "Post",
+         data:"id=" + Id + "& type=" + "chk" ,
+         url: "add_roleNow.php",
+         success: function (html) {
+           // Use SweetAlert instead of redirect
+           showSuccessAlert("Role set to inactive successfully", "Success", 'manage_role.php');
+           return false;
+         },
+         error: function (e) {
+           showErrorAlert("An error occurred while processing your request");
+         }
+       });
+     }
+   });
+ }
+</script>
+<script type="text/javascript">
+ function UnRespond(Id) {
+   // Use SweetAlert for confirmation instead of standard confirm
+   Swal.fire({
+     title: 'Set Role Active',
+     text: "Are you sure you want to set this role as active?",
+     icon: 'question',
+     showCancelButton: true,
+     confirmButtonColor: '#3085d6',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Yes, set active'
+   }).then((result) => {
+     if (result.isConfirmed) {
+       $.ajax({
+         type: "Post",
+         data:"id=" + Id + "& type=" + "unchk" ,
+         url: "add_roleNow.php",
+         success: function (html) {
+           // Use SweetAlert instead of redirect
+           showSuccessAlert("Role set to active successfully", "Success", 'manage_role.php');
+           return false;
+         },
+         error: function (e) {
+           showErrorAlert("An error occurred while processing your request");
+         }
+       });
+     }
+   });
+ }
+</script>
+<div id="role" class="modal fade" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="roleModalLabel">Add Role</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="add_item" class="form-label">Add Role</label>
+          <span class="errmsg text-danger" id="add_itemmsg"></span>
+          <input class="form-control" id="add_item" name="add_item" type="text">
+        </div>
+        <input type="hidden" name="roleid" id="roleid" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="add_role">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
