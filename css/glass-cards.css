@@ -1,0 +1,293 @@
+/**
+ * Glass Cards CSS
+ * Modern glassmorphism card styles for the admin dashboard
+ */
+
+/* Glass Card Base Styles */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--card-border-radius, 12px);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.glass-card:hover {
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Card Header */
+.glass-card-header {
+  padding: 1rem 1.25rem;
+  background: var(--glass-bg-darker);
+  border-bottom: var(--glass-border);
+  font-weight: 600;
+  color: var(--glass-text);
+}
+
+/* Card variants */
+.glass-card-primary {
+  border-top: 4px solid var(--primary);
+}
+
+.glass-card-success {
+  border-top: 4px solid var(--success);
+}
+
+.glass-card-info {
+  border-top: 4px solid var(--info);
+}
+
+.glass-card-warning {
+  border-top: 4px solid var(--warning);
+}
+
+.glass-card-danger {
+  border-top: 4px solid var(--danger);
+}
+
+/* Info Box Styles */
+.info-box {
+  display: flex;
+  min-height: 100px;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 0;
+}
+
+.info-box .info-box-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  font-size: 2rem;
+  color: var(--glass-text);
+}
+
+.glass-icon {
+  background: var(--glass-bg-darker);
+  border-radius: var(--card-border-radius, 12px) 0 0 var(--card-border-radius, 12px);
+}
+
+.info-box .info-box-content {
+  padding: 1rem;
+  flex: 1;
+}
+
+.info-box .info-box-text {
+  display: block;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.info-box .info-box-number {
+  display: block;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.info-box .progress {
+  height: 4px;
+  margin: 0.5rem 0;
+}
+
+.glass-progress {
+  background-color: var(--glass-bg-darker);
+}
+
+.info-box .progress-description {
+  display: block;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--glass-text-muted);
+}
+
+/* Glass Table */
+.glass-table {
+  color: var(--glass-text);
+  margin-bottom: 0;
+}
+
+.glass-table thead th {
+  background: var(--glass-bg-darker);
+  border-bottom: var(--glass-border);
+  color: var(--glass-text);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+}
+
+.glass-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.glass-table tbody tr:hover {
+  background: var(--glass-bg-lighter);
+}
+
+.glass-table td {
+  padding: 0.75rem 1rem;
+  border-top: var(--glass-border);
+  vertical-align: middle;
+}
+
+.glass-table .user-name {
+  font-weight: 500;
+}
+
+.glass-table .action-type {
+  font-weight: 600;
+}
+
+.glass-table .amount {
+  font-weight: 600;
+  color: var(--success);
+}
+
+/* Glass List Group */
+.glass-list-group {
+  border-radius: var(--card-border-radius, 12px);
+  overflow: hidden;
+}
+
+.glass-list-item {
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: var(--glass-border);
+  color: var(--glass-text);
+  transition: all 0.2s ease;
+}
+
+.glass-list-item:last-child {
+  border-bottom: none;
+}
+
+.glass-list-item:hover {
+  background: var(--glass-bg-lighter);
+  color: var(--glass-text-hover);
+}
+
+.glass-list-item .icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--glass-bg-darker);
+  color: var(--glass-text);
+  transition: all 0.3s ease;
+}
+
+.glass-list-item:hover .icon-wrapper {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Glass Button */
+.glass-btn {
+  background: var(--glass-bg-darker);
+  border: var(--glass-border);
+  color: var(--glass-text);
+  transition: all 0.3s ease;
+}
+
+.glass-btn:hover {
+  background: var(--glass-bg-lighter);
+  color: var(--glass-text-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* System Info List */
+.system-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.system-info-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: var(--glass-border);
+}
+
+.system-info-list li:last-child {
+  border-bottom: none;
+}
+
+.system-info-list li i {
+  width: 24px;
+  margin-right: 1rem;
+  color: var(--primary);
+}
+
+.system-info-list .info-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.system-info-list .info-value {
+  margin-left: auto;
+  font-family: monospace;
+  background: var(--glass-bg-darker);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Dark Mode Adjustments */
+[data-bs-theme="dark"] .glass-card {
+  background: var(--glass-bg-dark);
+  border: var(--glass-border-dark);
+  box-shadow: var(--glass-shadow-dark);
+}
+
+[data-bs-theme="dark"] .glass-card-header,
+[data-bs-theme="dark"] .glass-icon,
+[data-bs-theme="dark"] .glass-progress,
+[data-bs-theme="dark"] .glass-table thead th,
+[data-bs-theme="dark"] .glass-list-item .icon-wrapper,
+[data-bs-theme="dark"] .glass-btn,
+[data-bs-theme="dark"] .system-info-list .info-value {
+  background: var(--glass-bg-darker-dark);
+}
+
+[data-bs-theme="dark"] .glass-card:hover {
+  box-shadow: var(--glass-shadow-hover-dark);
+}
+
+[data-bs-theme="dark"] .glass-table tbody tr:hover,
+[data-bs-theme="dark"] .glass-list-item:hover,
+[data-bs-theme="dark"] .glass-btn:hover {
+  background: var(--glass-bg-lighter-dark);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+  .info-box {
+    flex-direction: column;
+  }
+  
+  .info-box .info-box-icon {
+    width: 100%;
+    border-radius: var(--card-border-radius, 12px) var(--card-border-radius, 12px) 0 0;
+    padding: 1rem;
+  }
+  
+  .glass-list-item {
+    padding: 0.75rem 1rem;
+  }
+}
